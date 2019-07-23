@@ -1,5 +1,6 @@
 import { firebaseInstance as Axios } from '../../axios-orders';
 import { AUTH_START, AUTH_SUCCESS, AUTH_FAIL, AUTH_LOGOUT, SET_AUTH_REDIRECT_PATH } from './actionTypes';
+import { apiKey } from '../../firebase/apikey';
 
 function authStart () {
   return {
@@ -58,9 +59,9 @@ export function authenticate (email, password, isSignup) {
       password: password,
       returnSecureToken: true
     }
-    let url = '/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCsEMGpomulNETbUBeKk0PGQ8SVNdbjj5k';
+    let url = '/identitytoolkit/v3/relyingparty/signupNewUser?key=' + apiKey;
     if (!isSignup) {
-      url = '/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCsEMGpomulNETbUBeKk0PGQ8SVNdbjj5k'
+      url = '/identitytoolkit/v3/relyingparty/verifyPassword?key=' + apiKey;
     }
     Axios.post(url, authData)
         .then(response => {
